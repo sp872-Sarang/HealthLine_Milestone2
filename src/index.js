@@ -104,5 +104,6 @@ app.get("/sessionLogout", (req, res) => {
   res.redirect("/sign_in");
 });
 
-app.listen(port);
+//app.listen(port);
+exports.helloWorld = functions.https.onRequest(app);
 console.log("Server started at http://localhost:" + port);
