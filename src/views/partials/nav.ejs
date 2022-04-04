@@ -1,0 +1,85 @@
+<nav class="navbar">
+
+
+  <!-- HealthLine_Logo -->
+  <div class="container has-text-centered">
+    <a class="navbar-item" href="/">
+      <figure class="image">
+        <img src="static/HealthLine_Logo.png" alt="Logo">
+      </figure>
+    </a>
+  </div>
+
+  <!-- Navbar pages -->
+  <div class="container is-widescreen">
+      <div class="navbar-item">
+        <a href="/client_dashboard" class="is-size-4 px-2">Meet Us
+        </a>
+      </div>
+      <div class="navbar-item">
+        <a href="/FAQ" class="is-size-4 px-2">FAQ
+        </a>
+      </div>
+      <div class="navbar-item">
+        <a href="/About_Us" class="is-size-4 px-2">About Us
+        </a>
+      </div>
+  </div> 
+    
+  <!-- Login and Get Started -->
+
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <a href="/sign_in" class="content is-size-4 is-rounded px-6">Log In
+        </a>
+      </div>
+      <div class="navbar-item">
+        <a href="/sign_up" class="button is-size-4 is-dark is-rounded">Get Started
+        </a>
+      </div>
+    </div>
+  
+</nav>
+
+
+<!-- <nav class="navbar">
+  <div class="container">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/">
+        <figure class="image">
+          <img src="static/HealthLine_Logo.png" alt="Logo">
+        </figure>
+      </a>
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <% if(locals.email) { %>
+      <div id="navbarMenu" class="navbar-menu">
+        <div class="navbar-end">
+          <a href="/dashboard" class="navbar-item">
+            <%= email %>
+              <i class="material-icons">person_outline</i>
+          </a>
+        </div>
+      </div>
+      <% } else if(locals.hideSignIn) { %>
+      <% } else { %>
+        <div id="navbarMenu" class="navbar-menu">
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <a href="/sign-in" class="button is-link is-rounded">Sign In
+              </a>
+            </div>
+            <div class="navbar-item">
+              <a href="/sign-up" class="button is-link is-rounded">Sign Up
+              </a>
+            </div>
+          </div>
+        </div>
+        
+      <% }%>
+  </div>
+</nav> -->

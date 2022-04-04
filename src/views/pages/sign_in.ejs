@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../partials/head') %>
+</head>
+
+<body>
+  <header>
+    <%- include('../partials/nav', { hideSignIn: true }) %>
+  </header>
+
+
+  <!-- <form id="login-form">
+    <input type="text" name="login" placeholder="Your user name" />
+    <input type="password" name="password" id="password" />
+    <button>
+      Sign In
+    </button>
+    <div id="login-error">
+
+    </div>
+    </div>
+  </form> -->
+
+  <section class="hero is-success is-fullheight">
+    <div class="hero-body">
+        <div class="container has-text-centered">
+            <div class="column is-4 is-offset-4">
+                <h3 class="title has-text-black">Login</h3>
+                <hr class="login-hr">
+                <p class="subtitle has-text-black">Please login to proceed.</p>
+                <div class="box">
+
+                  <figure class="image is-64x64 is-inline-block">
+                    <img class="is-rounded" src="static/logo.png">
+                  </figure>
+
+                    <form id="login-form">
+                        <div class="field">
+                            <div class="control">
+                                <input type="text" name="login" class="input is-large" type="email" placeholder="Your Email" autofocus="">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div class="control">
+                                <input name="password" id="password" class="input is-large" type="password" placeholder="Your Password">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="checkbox">
+              <input type="checkbox">
+              Remember me
+            </label>
+                        </div>
+                        <button class="button is-block is-info is-large is-fullwidth">Login <i class="fa fa-sign-in" aria-hidden="true"></i></button>
+                    </form>
+
+
+                </div>
+                <p class="has-text-grey">
+                    <a href="/sign_up">Sign Up</a> &nbsp;·&nbsp;
+                </p>
+            </div>
+        </div>
+    </div>
+  </section>
+</body>
+
+<script src="https://www.gstatic.com/firebasejs/9.6.4/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.4/firebase-auth-compat.js"></script>
+
+<script>
+
+  window.onload = () => {
+    const firebaseConfig = {
+  apiKey: "AIzaSyD_DkX4PI8irluZXH1Eg-BQC5CBRi3d8x4",
+  authDomain: "healthline-9cd87.firebaseapp.com",
+  projectId: "healthline-9cd87",
+  storageBucket: "healthline-9cd87.appspot.com",
+  messagingSenderId: "212046435096",
+  appId: "1:212046435096:web:9c60d25ede9c48ee2f446d"
+};
+    //Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+
+    app.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
+
+    document
+      .getElementById("login-form")
+      .addEventListener("submit", (event) => {
+        event.preventDefault();
+        const email = event.target.login.value;
+        const password = event.target.password.value;
+
+        // CS5356 TODO #3
+        // Sign in using the Firebase SDK for Web
+        // Get the users ID token
+        // Start a new session with the users ID token
+        // Redirect the user to the /dashboard
+
+        // When the user signs in with email and password.
+        // When the user signs in with email and password.
+        app.auth().signInWithEmailAndPassword(email , password).then(userCredential => {
+          // Get the user's ID token as it is needed to exchange for a session cookie.
+          //console.log("test",userCredential.user.getIdToken())
+
+          //Signed In
+          const user = userCredential.user
+          //idToken = user.getIdToken()
+          
+            console.log('User Signed IN : success!')
+
+            userCredential.user.getIdToken().then(function(idToken) {
+                fetch('/sessionLogin', {
+                method: 'POST',
+                headers: {
+                'Content-Type':'application/json'
+                },
+                body: JSON.stringify({idToken}) // add the users ID token here
+                })
+                .then(function(response){
+                  return response.json
+                })
+                .then(() => {
+                  console.log('Going to dashboard!')
+                  window.location.href = "/client_dashboard"
+                })
+            })
+        })
+        // .then(() => {
+        //   // A page redirect would suffice as the persistence is set to NONE.
+        //   //return firebase.auth().signOut();
+        //   window.location.href = "/dashboard"
+        // });
+
+        return false;
+      });
+  };
+</script>
+
+</html>
