@@ -10,7 +10,7 @@ const functions = require("firebase-functions");
 // CS5356 TODO #2
 // Uncomment this next line after you've created
 // serviceAccountKey.json
-const serviceAccount = require("../HealthLine_Service_Account.json");
+const serviceAccount = require("./../config/HealthLine_Service_Account.json");
 const userFeed = require("./app/user-feed");
 const authMiddleware = require("./app/auth-middleware");
 
@@ -104,6 +104,5 @@ app.get("/sessionLogout", (req, res) => {
   res.redirect("/sign_in");
 });
 
-//app.listen(port);
-exports.helloWorld = functions.https.onRequest(app);
+app.listen(port);
 console.log("Server started at http://localhost:" + port);
