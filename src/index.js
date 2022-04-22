@@ -11,7 +11,8 @@ const functions = require("firebase-functions");
 // Uncomment this next line after you've created
 // serviceAccountKey.json
 const serviceAccount = require("./../config/HealthLine_Service_Account.json");
-const userFeed = require("./app/user-feed");
+const userFeed = require("./app/user-feed"); 
+const UserService = require("./app/user-service"); 
 const authMiddleware = require("./app/auth-middleware");
 
 // CS5356 TODO #2
@@ -48,6 +49,14 @@ app.get("/sign_up", function (req, res) {
   res.render("pages/sign_up");
 });
 
+app.get("/patient_sign_up", function (req, res) {
+  res.render("pages/sign_up", { type: 'patient' });
+});
+
+app.get("/owner_sign_up", function (req, res) {
+  res.render("pages/sign_up", { type: 'owner' });
+});
+
 app.get("/client_dashboard", authMiddleware, async function (req, res) {
   const feed = await userFeed.get();
   res.render("pages/Client_Dashboard", { user: req.user, feed });
@@ -65,7 +74,7 @@ app.get("/About_Us", function (req, res) {
   res.render("pages/About_Us");
 });
 
-app.post("/sessionLogin", async (req, res) => {
+app.post("/sessionLogin", authMiddleware, async (req, res) => {
   // CS5356 TODO #4
   // Get the ID token from the request body
   // Create a session cookie using the Firebase Admin SDK
@@ -76,6 +85,8 @@ app.post("/sessionLogin", async (req, res) => {
   //res.sendStatus(501)
 
   const idToken = req.body.idToken.toString();
+  const role = req.body.role;
+  const signInType = req.body.signInType;
 
   // Set session expiration to 1 hr.
   const expiresIn = 60 * 60  * 1000;
@@ -90,8 +101,26 @@ app.post("/sessionLogin", async (req, res) => {
         // Set cookie policy for session cookie.
         const options = { maxAge: expiresIn, httpOnly: true, secure: true };
         res.cookie('__session', sessionCookie, options);
+        admin.auth()
+        .verifySessionCookie(sessionCookie, true /** checkRevoked */)
+        .then(userData => {
+          console.log("Logged in:", userData.email);
+          const id = userData.sub;
+          const email = userData.email;
+          if (signInType === 'register') {
+            UserService.createUser(id, email, role);
+            .then(() => {
+              res.status(200).send(JSON.stringify({ status: 'success' }));
+            })
+          } else {
+            res.status(200).send(JSON.stringify({ status: 'success' }));
+          }
+
+          
+        })
+       
         //res.sendStatus(200).send(JSON.stringify({ status: 'success' }));
-        res.status(200).send(JSON.stringify({ status: 'success' }));
+       
       },
       (error) => {
         res.status(401).send('UNAUTHORIZED REQUEST!');
@@ -100,7 +129,7 @@ app.post("/sessionLogin", async (req, res) => {
 });
 
 app.get("/sessionLogout", (req, res) => {
-  res.clearCookie("session");
+  res.clearCookie("__session");
   res.redirect("/sign_in");
 });
 
