@@ -108,7 +108,7 @@ app.post("/sessionLogin", authMiddleware, async (req, res) => {
           const id = userData.sub;
           const email = userData.email;
           if (signInType === 'register') {
-            UserService.createUser(id, email, role);
+            UserService.createUser(id, email, role)
             .then(() => {
               res.status(200).send(JSON.stringify({ status: 'success' }));
             })
