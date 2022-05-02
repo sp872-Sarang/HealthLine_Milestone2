@@ -105,181 +105,85 @@
                                 </div>
                             </div>
                         </article>
-                        <!-- <article class="post">
-                            <h4>I'm trying to use hamburger menu on bulma css, but it doesn't work. What is wrong?</h4>
-                            <div class="media">
-                                <div class="media-left">
-                                    <p class="image is-32x32">
-                                        <img src="http://bulma.io/images/placeholders/128x128.png">
-                                    </p>
-                                </div>
-                                <div class="media-content">
-                                    <div class="content">
-                                        <p>
-                                            <a href="#">@hamburgler</a> replied 5 hours ago &nbsp;
-                                            <span class="tag">Question</span>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="media-right">
-                                    <span class="has-text-grey-light"><i class="fa fa-comments"></i> 2</span>
-                                </div>
-                            </div>
-                        </article>
-                        <article class="post">
-                            <h4>How to make tiles wrap with Bulma CSS?</h4>
-                            <div class="media">
-                                <div class="media-left">
-                                    <p class="image is-32x32">
-                                        <img src="http://bulma.io/images/placeholders/128x128.png">
-                                    </p>
-                                </div>
-                                <div class="media-content">
-                                    <div class="content">
-                                        <p>
-                                            <a href="#">@rapper</a> replied 3 hours ago &nbsp;
-                                            <span class="tag">Question</span>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="media-right">
-                                    <span class="has-text-grey-light"><i class="fa fa-comments"></i> 2</span>
-                                </div>
-                            </div>
-                        </article> -->
+                    
                     </div>
                 </div>
-
+                <!-- FORM -->
                 <div class="column is-one-third has-text-left">
                     <div class = "is-size-3 has-text-centered"> <h1>Shoot us a question!</h1> </div>
-                    <div class="field">
-                        <label class="label">Name</label>
-                        <div class="control">
-                            <input class="input is-medium" type="text">
-                        </div>
-                    </div>
-                    <div class="field">
-                        <label class="label">Email</label>
-                        <div class="control">
-                            <input class="input is-medium" type="text">
-                        </div>
-                    </div>
-                    <div class="field">
-                        <label class="label">Question</label>
-                        <div class="control">
-                            <textarea class="textarea is-medium"></textarea>
-                        </div>
-                    </div>
-                    <div class="control">
-                        <button type="submit" class="button is-link is-fullwidth has-text-weight-medium is-medium is-success">Send Question</button>
-                    </div>
+                    
+                    <form method="post" id="FAQ-form" >
+                        <fieldset>
+                            <div class="field">
+                                <label class="label">Name</label>
+                                <div class="control">
+                                    <input class="input is-medium" type="text" name="inputName" id="inputName">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">Email</label>
+                                <div class="control">
+                                    <input class="input is-medium" type="text" name="inputEmail" id="inputEmail">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">Question</label>
+                                <div class="control">
+                                    <textarea class="textarea is-medium" name="inputQuery" id="inputQuery"></textarea>
+                                </div>
+                            </div>
+                            <div class="control">
+                                <!-- <button type="button" class="button is-link is-fullwidth has-text-weight-medium is-medium is-success" onclick="storeData()">Send Question</button> -->
+                                <button type="submit" class="button is-link is-fullwidth has-text-weight-medium is-medium is-success">Send Question</button>
+                            </div>
+                        </fieldset>
+                    </form>
+
                 </div>
+                <!-- END FORM -->
+                
             </div>
         </section>
-    <!-- </div>
-</section> -->
-
-
-
-  <!-- <p class = "custom_hero_FAQ"></p>
-
-  <div class="block">
-    This text is within a <strong>block</strong>.
-  </div>
-  <div class="block">
-    This text is within a <strong>second block</strong>. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa fringilla egestas. Nullam condimentum luctus turpis.
-  </div>
-  <div class="block">
-    This text is within a <strong>third block</strong>. This block has no margin at the bottom.
-  </div> -->
-
-  <!-- <div class="columns">
-    <div class="column">  
-        <div class="block">
-            <p class="custom_FAQ_text"> Do you have covid testing services? </p>
-            <p class="custom_FAQ_A"> Yes we offer sameday services </p>
-        </div>
-        <div class="block">
-            <p class="custom_FAQ_text"> Can I call for a same day appointment for an evaluation and diagnosis? </p>
-            <p class="custom_FAQ_A"> Yes – Please call as soon as possible if you are experiencing an urgent medical matter that needs to be evaluated by our practice. </p>
-        </div>
-        <div class="block">
-            <p class="custom_FAQ_text"> Who do I contact in the event of an urgent matter? </p>
-            <p class="custom_FAQ_A"> Please contact us at 917-704-6690 or email us at services@healthline.com. </p>
-        </div>
-        <div class="block">
-            <p class="custom_FAQ_text"> Will I be charged for a less than 24 hour cancelled appointment or if I “no-show”? </p>
-            <p class="custom_FAQ_A"> Yes – Every scheduled appointment occupies a time slot with a provider that could be utilized by another patient who is unwell or would like to undergo a comprehensive examination. </p>
-        </div>
-
-    </div> -->
-
-    <!-- <div class="columns">
-        <div class="column is-two-thirds"> 
-            <div class="block">
-                Do you have covid testing services?
-                Yes we offer sameday services. 
-            </div>
-            <div class="block">
-                Can I call for a same day appointment for an evaluation and diagnosis?
-                Yes – Please call as soon as possible if you are experiencing an urgent medical matter that needs to be evaluated by our practice.
-            </div>
-            <div class="block">
-                Who do I contact in the event of an urgent matter? 
-                Please contact us at 917-704-6690 or email us at services@healthline.com. 
-            </div>
-            <div class="block">
-                Will I be charged for a less than 24 hour cancelled appointment or if I “no-show”? 
-                Yes – Every scheduled appointment occupies a time slot with a provider that could be utilized by another patient who is unwell or would like to undergo a comprehensive examination.
-            </div>
-        </div>
-
-        <div class = "column">
-
-        </div> -->
-
-
-  <!-- <div class="columns">
-
-    <div class="column"> -->
-      <!-- <section class="section"> -->
-        <!-- Tagline -->
-        <!-- <div>
-          <p class="custom_HealthLine_Tagline"> A Personal Relationship
-            With Medical Excellence </p>
-        </div> -->
-        <!-- services -->
-        <!-- <div class="columns">
-          <div class="column">
-            <figure class="custom_covid_service_img">
-              <img src="static/covid.png">
-            </figure>        
-          </div>
-          <div class="column">
-            <figure class="custom_derma_service_img">
-              <img src="static/dermatology.png">
-            </figure>        
-          </div>
-          <div class="column">
-            <figure class="custom_nutrition_service_img">
-              <img src="static/nutrition.png">
-            </figure>        
-          </div>
-        </div> -->
-      <!-- </section> -->
-    <!-- </div>
-
-    <div class="column">
-      <figure class="image">
-        <img src="static/backgroung_img.png">
-      </figure>
-    </div> -->
-
-    
 
   </div>
 
 </body>
+
+<script>
+
+window.onload = () => {
+
+    document
+      .getElementById("FAQ-form")
+      .addEventListener("submit", (event) => {
+        event.preventDefault();
+        const email = event.target.inputEmail.value;
+        const question = event.target.inputQuery.value;
+        const name = event.target.inputName.value;
+
+        fetch('/insert_data', {
+                method: 'POST',
+                headers: {
+                'Content-Type':'application/json'
+                },
+                body: JSON.stringify({
+                    inputName : name,//'TEST',
+                    inputEmail : email, //'justanotheremail@email.com',
+                    inputQuery : question//'what is this?'
+                    }
+                ) // add the users ID token here
+                }).then((res) => {
+                  if (res.status==200) { 
+                    console.log('FAQ sent'); 
+                  }
+                  else {
+                    console.log('Failed to send Question.')
+                  }
+                });
+    
+      });
+};
+</script>
 
 <!-- <%- include('../partials/footer') %> -->
 

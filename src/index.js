@@ -100,6 +100,68 @@ app.get("/sessionLogout", (req, res) => {
   res.redirect("/sign_in");
 });
 
+//firestore
+
+const db = admin.firestore()
+
+// module.exports = {
+//   createUser: async (id, email, role) => {
+//           const docRef = db.collection('users').doc(id)
+//           await docRef.set({
+//             email: email,
+//             role: role,
+
+//           })
+//   },
+
+//   getUserById: async (id) => {
+//       const snapshot = await db.collection('users').get()
+//       console.error(snapshot.docs)
+//       return snapshot.docs[0].data()
+//   }
+// }
+
+async function storeData(req){
+
+  // const docRef = db.collection('users').doc(id)
+  //         await docRef.set({
+  //           email: email,
+  //           role: role,
+
+  //         })
+
+  uuid = req.body.inputEmail.toString()
+
+  const writeResult = await 
+  db.collection('faq_form_data').doc(uuid).set({
+  name: req.body.inputName.toString(),
+  email: req.body.inputEmail.toString(),
+  query: req.body.inputQuery.toString(),
+  })
+  .then(function() {console.log("Document successfully written!");})
+  .catch(function(error) {console.error("Error writing document: ", error);});
+  }
+
+app.post('/insert_data', async (request,response) =>{
+  var insert = await storeData(request);
+  response.sendStatus(200);
+  });
+
+async function getFirestore(){
+  // const firestore_con  = await admin.firestore();
+  const writeResult = await db.collection('faq_form_data').doc(id).get().then(doc => {
+  if (!doc.exists) { console.log('No such document!'); }
+  else {return doc.data();}})
+  .catch(err => { console.log('Error getting document', err);});
+  return writeResult
+  }
+
+async function getUserById (id) {
+      const snapshot = await db.collection('faq_form_data').get()
+      console.error(snapshot.docs)
+      return snapshot.docs[0].data()
+  }
+
 //app.listen(port);
 exports.helloWorld = functions.https.onRequest(app);
 console.log("Server started at http://localhost:" + port);
