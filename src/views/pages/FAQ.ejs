@@ -1,13 +1,16 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <%- include('../partials/head') %>
+  <!-- <script type = "text/javascript" src = "../../index.js"></script> -->
 </head>
 
 <body>
   <header>
     <%- include('../partials/nav') %>
+    
   </header>
 
  <section class="section has-background-success">
@@ -152,30 +155,60 @@
 
                 <div class="column is-one-third has-text-left">
                     <div class = "is-size-3 has-text-centered"> <h1>Shoot us a question!</h1> </div>
+                    <form action="/insert_data" method="post" >
+                        <fieldset>
+                            <div class="field">
+                                <label class="label">Name</label>
+                                <div class="control">
+                                    <input class="input is-medium" type="text" name="inputName" id="inputName">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">Email</label>
+                                <div class="control">
+                                    <input class="input is-medium" type="text" name="inputEmail" id="inputEmail">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="label">Question</label>
+                                <div class="control">
+                                    <textarea class="textarea is-medium" name="inputQuery" id="inputQuery"></textarea>
+                                </div>
+                            </div>
+                            <div class="control">
+                                <!-- <button type="button" class="button is-link is-fullwidth has-text-weight-medium is-medium is-success" onclick="storeData()">Send Question</button> -->
+                                <button type="submit" class="button is-link is-fullwidth has-text-weight-medium is-medium is-success">Send Question</button>
+                            </div>
+                        </fieldset>
+                    </form>
+                    <!-- <div class = "is-size-3 has-text-centered"> <h1>Shoot us a question!</h1> </div>
                     <div class="field">
                         <label class="label">Name</label>
                         <div class="control">
-                            <input class="input is-medium" type="text">
+                            <input class="input is-medium" type="text" name="inputName" id="inputName">
                         </div>
                     </div>
                     <div class="field">
                         <label class="label">Email</label>
                         <div class="control">
-                            <input class="input is-medium" type="text">
+                            <input class="input is-medium" type="text" name="inputEmail" id="inputEmail">
                         </div>
                     </div>
                     <div class="field">
                         <label class="label">Question</label>
                         <div class="control">
-                            <textarea class="textarea is-medium"></textarea>
+                            <textarea class="textarea is-medium" name="inputEmail" id="inputQuery"></textarea>
                         </div>
                     </div>
                     <div class="control">
-                        <button type="submit" class="button is-link is-fullwidth has-text-weight-medium is-medium is-success">Send Question</button>
-                    </div>
+                        < <button type="button" class="button is-link is-fullwidth has-text-weight-medium is-medium is-success" onclick="storeData()">Send Question</button> -->
+                        <!-- <button type="submit" class="button is-link is-fullwidth has-text-weight-medium is-medium is-success" formaction="/insert_data">Send Question</button>
+                    </div> --> 
                 </div>
             </div>
         </section>
+
+        
     <!-- </div>
 </section> -->
 
@@ -279,8 +312,64 @@
 
   </div>
 
+  <!-- <script type ="text/javascript">
+    // const admin = require("firebase-admin");
+    // admin.initializeApp({
+    // credential: admin.credential.cert(serviceAccount),
+    // });
+    // const db = admin.firestore();
+    function storeData() {   
+    var inputName = document.getElementById('inputName').value;
+    var inputEmail = document.getElementById('inputEmail').value;
+    var inputQuery = document.getElementById('inputQuery').value;
+
+    db.collection("queries").doc(id).set({
+    name: inputName,
+    email: inputEmail,
+    query: inputQuery,
+    })
+
+    }
+    </script> -->
+
+    <!-- <script type ="text/javascript" src='../../../config/serviceAccountKey.json'></script> -->
+
+    <!-- <script type = "text/javascript">
+        const admin = require("firebase-admin");
+        const serviceAccount = require("../../../config/serviceAccountKey.json");
+
+        admin.initializeApp({
+            credential: admin.credential.cert(serviceAccount)
+        });
+
+        const db = admin.firestore();
+    </script> -->
+
 </body>
+
+<!-- const admin = require("firebase-admin");
+const serviceAccount = require("./../../config/serviceAccountKey.json");
+
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount)
+}); -->
+
+<!-- db.collection("queries").doc("query1").set({
+    name: "Sid Srivastava",
+    email: "sid_srivastava@gmail.com",
+    query: "Can I have benign growths removed?"
+})
+db.collection("queries").doc("query2").set({
+    name: "Avi Gupta",
+    email: "avi_gupta@gmail.com",
+    query: "How much coverage will my insurance policy provide?"
+}, { merge: true }); -->
 
 <!-- <%- include('../partials/footer') %> -->
 
+
 </html>
+
+
+
+

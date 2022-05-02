@@ -10,7 +10,10 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
     <!-- Bulma Version 0.9.0-->
     <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
-    <link rel="stylesheet" type="text/css" href="../css/admin.css">
+    <!-- <link rel="stylesheet" type="text/css" href="../css/admin.css"> -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/9.6.4/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.4/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.4/firebase-firestore.js"></script> -->
 </head>
 
 <body>
@@ -150,7 +153,7 @@
                     <i class="fa fa-angle-down" aria-hidden="true"></i>
                   </span>
                 </a>
-                            </header>
+                            <!-- </header>
                             <div class="field">
                                 <div class="control is-medium">
                                     <input class="input is-medium" type="text" placeholder="Do you offer any diet plans?">
@@ -165,13 +168,58 @@
                         <div class="control is-medium">
                             <input class="input is-medium" type="text" placeholder="Do you have any discounts for first time customers?">
                         </div>
+                </div> -->
+            </header>
+            <div class="card-table">
+                <div class="content">
+                    <table class="table is-fullwidth is-striped">
+                        <tbody>
+                            <tr>
+                                <td width="5%"><i class="fa fa-bars"></i></td>
+                                <td><%= db_result.query %></td>
+                            </tr>
+                            <tr>
+                                <td width="5%"><i class="fa fa-bars"></i></td>
+                                <td>Do you treat sclerosis?</td>
+                            </tr>
+                            <tr>
+                                <td width="5%"><i class="fa fa-bars"></i></td>
+                                <td>Do you have any discounts for first time customers?</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
+            </div>
+        <!-- <div class="column is-one-third has-text-left">
+            <div class = "is-size-3 has-text-centered"> <h1>Shoot us a question!</h1> </div>
+            <div class="content">
+                    <form id = "add-FAQ-form"></form>
+                    <ul id = "FAQ-list"></ul>
+            </div>
+        </div> -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <script async type="text/javascript" src="../js/bulma.js"></script>
+    <!-- <script async type="text/javascript" src="../js/bulma.js"></script> -->
+
+
+    <!-- <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyDVeHN2WcDlQM10HQdU1hXFDrNKVLt6ekA",
+            authDomain: "cs5356-milestone-1-47b71.firebaseapp.com",
+            projectId: "cs5356-milestone-1-47b71",
+            storageBucket: "cs5356-milestone-1-47b71.appspot.com",
+            messagingSenderId: "54048075007",
+            appId: "1:54048075007:web:daf5f9a80d5f1dc81270ca",
+            measurementId: "G-VE6KYGT311"
+        };
+        const aaa = firebase.initializeApp(config);
+        const db = aaa.firestore();
+        // db.settings({timestampsInSnapshots: true});
+    </script>
+    <script src = "od.js"></script> -->
 </body>
 
 </html>

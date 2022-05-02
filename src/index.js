@@ -7,10 +7,15 @@ const app = express();
 const port = process.env.PORT || 8080;
 const functions = require("firebase-functions");
 
+// app.engine('html', require('ejs').renderFile);
+// app.set('views','./views');
+// app.set('view engine','ejs');
+
 // CS5356 TODO #2
 // Uncomment this next line after you've created
 // serviceAccountKey.json
-const serviceAccount = require("./../config/HealthLine_Service_Account.json");
+// const serviceAccount = require("./../config/HealthLine_Service_Account.json");
+const serviceAccount = require("./../config/serviceAccountKey.json");
 const userFeed = require("./app/user-feed"); 
 const UserService = require("./app/user-service"); 
 const authMiddleware = require("./app/auth-middleware");
@@ -128,11 +133,155 @@ app.post("/sessionLogin", authMiddleware, async (req, res) => {
   );
 });
 
+app.post('/insert_data', async (request,response) =>{
+  var insert = await storeData(request);
+  response.sendStatus(200);
+  });
+
+app.get('/owner_dashboard',async (req,res) =>{
+  var db_result = await getFirestore();
+  // var db_result = await getUserById();
+  res.render('pages/Owner_Dashboard', {
+    db_result: db_result
+    });
+  });
+
 app.get("/sessionLogout", (req, res) => {
   res.clearCookie("__session");
   res.redirect("/sign_in");
 });
 
+// app.get('/', function(req, res, next) {
+//   let usersData = db.collection('faq_form_data');
+//   let query = usersData.get()
+//     .then(snapshot => {
+//       if (snapshot.empty) {
+//         console.log('No matching documents.');
+//         return;
+//       }  
+
+//       snapshot.forEach(doc => {
+//         console.log(doc.data())
+//       });
+//     })
+//     .catch(err => {
+//       console.log('Error getting documents', err);
+//     });
+
+//     res.render('pages/Owner_Dashboard', {
+//       faq_form_data: faq_form_data // Array of all the users.
+//     });
+// });
+
+const db = admin.firestore();
+
+
+  // async function createQuery (name, email, query){
+  //     const docRef = db.collection('queries').doc('query')
+  //     await docRef.set({
+  //         name: name,
+  //         email: email,
+  //         query: query,
+  //     })
+  // }
+
+  async function getData(req, res) {
+    const faq_form_data = [];
+    const querySnapshot = await firestore.collection('faq_form_data').get();
+    querySnapshot.forEach(doc => {
+     console.log(doc.id, ' => ', doc.data());
+     faq_form_data.push(doc.data());
+    });
+   
+    res.render('pages/Owner_Dashboard', {faq_form_data});
+   }
+
+  async function storeData(request){
+    const writeResult = await 
+    db.collection('faq_form_data').add({
+    name: request.body.inputName,
+    email: request.body.inputEmail,
+    query: request.body.inputQuery,
+    })
+    .then(function() {console.log("Document successfully written!");})
+    .catch(function(error) {console.error("Error writing document: ", error);});
+    }
+
+    async function getFirestore(){
+      // const firestore_con  = await admin.firestore();
+      const writeResult = await db.collection('faq_form_data').doc(id).get().then(doc => {
+      if (!doc.exists) { console.log('No such document!'); }
+      else {return doc.data();}})
+      .catch(err => { console.log('Error getting document', err);});
+      return writeResult
+      }
+
+    async function getUserById (id) {
+          const snapshot = await db.collection('faq_form_data').get()
+          console.error(snapshot.docs)
+          return snapshot.docs[0].data()
+      }
+
+    // const faq_query = document.querySelector('#FAQ-list')
+
+    // function renderQuery(doc){
+    //   let qu = document.createElement('qu')
+    //   let question = document.createElement('span')
+    //   let p_name = document.createElement('span')
+
+    //   qu.setAttribute('data-id', doc.id)
+    //   question.textContent = doc.data().query
+    //   p_name.textContent = doc.data().name
+
+    //   qu.appendChild(question)
+    //   qu.appendChild(p_name)
+
+    //   faq_query.appendChild(qu)
+    // }
+
+    // db.collection('faq_form_data').get().then((snapshot) => {
+    //   snapshot.docs.forEach(doc => {
+    //     renderQuery(doc)
+    //   })
+    // })
+
+  // async function storeData (name, email, query){  
+  //   var inputName = document.getElementById('inputName').value;
+  //   var inputEmail = document.getElementById('inputEmail').value;
+  //   var inputQuery = document.getElementById('inputQuery').value;
+
+  //   const docRef = db.collection('queries').doc(id)
+  //   await docRef.set({
+  //   name: inputName,
+  //   email: inputEmail,
+  //   query: inputQuery,
+  //   })
+
+  //   }
+
+    // db.collection("queries").doc('query').set({
+    //     name: 'THIS',
+    //     email: 'IS',
+    //     query: 'Test',
+    // })
+
+
+    // function storeData() {
+
+    //     var inputName = document.getElementById('inputName').value;
+    //     var inputEmail = document.getElementById('inputEmail').value;
+    //     var inputQuery = document.getElementById('inputQuery').value;
+
+    //     db.collection("queries").doc('query').set({
+    //       name: inputName,
+    //       email: inputEmail,
+    //       query: inputQuery,
+    //   })
+
+    // }
+
+
 //app.listen(port);
-exports.helloWorld = functions.https.onRequest(app);
+// exports.helloWorld = functions.https.onRequest(app);
+exports.app = functions.https.onRequest(app);
 console.log("Server started at http://localhost:" + port);

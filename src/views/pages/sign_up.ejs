@@ -78,15 +78,24 @@
 
   window.onload = () => {
     console.log('Running onload')
-    const firebaseConfig = {
-      apiKey: "AIzaSyD_DkX4PI8irluZXH1Eg-BQC5CBRi3d8x4",
-      authDomain: "healthline-9cd87.firebaseapp.com",
-      projectId: "healthline-9cd87",
-      storageBucket: "healthline-9cd87.appspot.com",
-      messagingSenderId: "212046435096",
-      appId: "1:212046435096:web:9c60d25ede9c48ee2f446d"
-    };
+    // const firebaseConfig = {
+    //   apiKey: "AIzaSyD_DkX4PI8irluZXH1Eg-BQC5CBRi3d8x4",
+    //   authDomain: "healthline-9cd87.firebaseapp.com",
+    //   projectId: "healthline-9cd87",
+    //   storageBucket: "healthline-9cd87.appspot.com",
+    //   messagingSenderId: "212046435096",
+    //   appId: "1:212046435096:web:9c60d25ede9c48ee2f446d"
+    // };
 
+      const firebaseConfig = {
+    apiKey: "AIzaSyDVeHN2WcDlQM10HQdU1hXFDrNKVLt6ekA",
+    authDomain: "cs5356-milestone-1-47b71.firebaseapp.com",
+    projectId: "cs5356-milestone-1-47b71",
+    storageBucket: "cs5356-milestone-1-47b71.appspot.com",
+    messagingSenderId: "54048075007",
+    appId: "1:54048075007:web:daf5f9a80d5f1dc81270ca",
+    measurementId: "G-VE6KYGT311"
+  };
     const app = firebase.initializeApp(firebaseConfig);
     
     app.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
