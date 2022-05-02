@@ -66,11 +66,7 @@ app.get("/About_Us", function (req, res) {
 });
 
 app.post("/sessionLogin", async (req, res) => {
-  // CS5356 TODO #4
-  // Get the ID token from the request body
-  // Create a session cookie using the Firebase Admin SDK
-  // Set that cookie with the name 'session'
-  // And then return a 200 status code instead of a 501
+
   console.log("in sessionLogin")
   console.log(req.body)
   //res.sendStatus(501)
