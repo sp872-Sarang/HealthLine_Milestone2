@@ -133,7 +133,7 @@ async function storeData(req){
   uuid = req.body.inputEmail.toString()
 
   const writeResult = await 
-  db.collection('faq_form_data').doc(uuid).set({
+  db.collection('faq').doc(uuid).set({
   name: req.body.inputName.toString(),
   email: req.body.inputEmail.toString(),
   query: req.body.inputQuery.toString(),
@@ -147,9 +147,12 @@ app.post('/insert_data', async (request,response) =>{
   response.sendStatus(200);
   });
 
-async function getFirestore(){
+async function getFirestore(req){
+
+  const collection_name = req.body.collectionName.toString()
+  const document_id = req.body.documentId.toString()
   // const firestore_con  = await admin.firestore();
-  const writeResult = await db.collection('faq_form_data').doc(id).get().then(doc => {
+  const writeResult = await db.collection(collection_name).doc(document_id).get().then(doc => {
   if (!doc.exists) { console.log('No such document!'); }
   else {return doc.data();}})
   .catch(err => { console.log('Error getting document', err);});
@@ -157,10 +160,36 @@ async function getFirestore(){
   }
 
 async function getUserById (id) {
-      const snapshot = await db.collection('faq_form_data').get()
+      const snapshot = await db.collection('faq').get()
       console.error(snapshot.docs)
       return snapshot.docs[0].data()
   }
+
+app.post('/get_data', async (request,response) =>{
+  var data = await getFirestore(request);
+  console.log("Before Request");
+  console.log(request.body.collectionName.toString());
+  console.log(request.body.documentId.toString());
+  console.log(data);
+  console.log("Request is Incoming");
+
+      
+  const responseData = {
+    collection_name : request.body.collectionName.toString(),
+    document_id : request.body.documentId.toString(),
+    req_data :data,
+    status : 200
+  }
+  response.setHeader('Content-Type', 'application/json');
+  
+  // body: JSON.stringify({
+  //   collectionName : 'faq',//'TEST',
+  //   documentId : 'test23', //'justanotheremail@email.com',
+  //   }
+  const jsonContent = JSON.stringify(responseData);
+  response.send(jsonContent);
+
+  });
 
 //app.listen(port);
 exports.helloWorld = functions.https.onRequest(app);
